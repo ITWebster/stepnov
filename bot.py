@@ -1,5 +1,7 @@
+import os
 import discord
 import responses
+from decouple import config
 
 
 # This function will send a message to the discord chat
@@ -21,7 +23,7 @@ async def send_messages(message, user_message, username, is_private):
 
 #This function runs a discord bot
 def run_discord_bot():
-    TOKEN = 'MTE2MzYzNjQ2NjUwOTk0Mjg3Ng.GI5T8t.yh-0XXQofLetw9eH6-wTiWIhlTw3vcoak94bqM'
+    TOKEN = config('DISCORD_TOKEN')
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)

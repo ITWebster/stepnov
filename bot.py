@@ -53,3 +53,5 @@ def run_discord_bot():
 
         else:
             await send_messages(message, user_message, username, is_private=False)
+
+    client.run(TOKEN)

@@ -11,8 +11,6 @@ async def send_messages(message, user_message, username, is_private):
         if response:
             await message.author.send(response) if is_private else await message.channel.send(response)
 
-        if response:  # Check if the response is not empty
-            await message.author.send(response) if is_private else await message.channel.send(response)
         else:
             print("Response is empty, not sending.")
 
@@ -36,7 +34,7 @@ def run_discord_bot():
     async def on_message(message):
 
         print(message.channel)
-
+         
         if message.author == client.user:
             return
 
@@ -55,6 +53,3 @@ def run_discord_bot():
 
         else:
             await send_messages(message, user_message, username, is_private=False)
-
-
-    client.run(TOKEN)

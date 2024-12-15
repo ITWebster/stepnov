@@ -6,20 +6,30 @@ def die_roll_check(mess):
     else:
         return False
 
-
 def get_die_params(mess):
-    parsed_string = mess.split("d")
-    total_rolls = int(parsed_string[0])
-    die_type = int(parsed_string[1])
-    return total_rolls, die_type
+    parts = mess.split("d")
+    total_rolls = int(parts[0])
 
+    # Splitting the second part to handle modifiers
+    if '+' in parts[1]:
+        die_type, modifier = map(int, parts[1].split('+'))
+        modifier = +modifier  # Positive modifier
+    elif '-' in parts[1]:
+        die_type, modifier = map(int, parts[1].split('-'))
+        modifier = -modifier  # Negative modifier
+    else:
+        die_type = int(parts[1])
+        modifier = 0  # No modifier
+
+    return total_rolls, die_type, modifier
 
 def roll_die(roll_params):
     results = []
     total = 0
-    total_rolls, die_type = roll_params
+    total_rolls, die_type, modifier = roll_params
     for _ in range(total_rolls):
         die_roll = random.randint(1, die_type)
         results.append(die_roll)
         total += die_roll
+    total += modifier
     return results, total

@@ -1,4 +1,5 @@
 import die_roller as sm
+import stepnov_ai as sai
 
 def die_rolls(d_message, user_n):
     if sm.die_roll_check(d_message):
@@ -13,3 +14,13 @@ def die_rolls(d_message, user_n):
     else:
         print(
             "Invalid input format. Please provide input in the format 'NdM', where N is the number of rolls and M is the type of die.")
+        
+def stepnov_ai(d_message, user_n):
+    step_check = sai.stepnov_check(d_message)
+    print(step_check)
+    if sai.stepnov_check(d_message):
+
+        stepnovs_wisdom = sai.stepnov_speaks(d_message)
+        return stepnovs_wisdom
+    else:
+        print("Stepnov has nothing to say")

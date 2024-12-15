@@ -7,12 +7,19 @@ from decouple import config
 # This function will send a message to the discord chat
 async def send_messages(message, user_message, username, is_private):
     try:
-        response = responses.die_rolls(user_message, username)
-        if response:
-            await message.author.send(response) if is_private else await message.channel.send(response)
+        die_response = responses.die_rolls(user_message, username)
+        
+        if die_response:
+            await message.author.send(die_response) if is_private else await message.channel.send(die_response)
 
         else:
-            print("Response is empty, not sending.")
+            stepnov_response = responses.stepnov_ai(user_message, is_private)
+            print(stepnov_response)
+            if stepnov_response:
+                await message.author.send(stepnov_response) if is_private else await message.channel.send(stepnov_response)
+    
+            else:
+                print("Stepnov had nothing to say about this.")
 
     except Exception as e:
         print(e)

@@ -14,10 +14,13 @@ async def send_messages(message, user_message, username, is_private):
         else:
             print("Response is empty, not sending.")
 
+        response  = responses.choose_party(user_message)
+        if response:
+            await message.author.send(response) if is_private else await message.channel.send(response)
+
     except Exception as e:
         print(e)
         
-
 
 #This function runs a discord bot
 def run_discord_bot():

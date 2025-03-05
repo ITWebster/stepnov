@@ -1,4 +1,14 @@
 import die_roller as sm
+import random
+
+
+def choose_party(d_message):
+    if "stepnov" in d_message.lower() and "roll party" in d_message.lower():
+        party_array = ["Lucan","Lugosi","Grover"]
+        roll_num = random.randint(0,2)
+        return "Stepnov has chosen " + party_array[roll_num]
+    else:
+        print("Stepnov has nothing to say")
 
 def die_rolls(d_message, user_n):
     if sm.die_roll_check(d_message):
